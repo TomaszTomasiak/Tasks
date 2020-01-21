@@ -17,6 +17,6 @@ public class DbService {
     }
 
     public List<Task> getTaskById() {
-        return repository.findTaskById();
+        return repository.findTaskById(1);
     }
 }
