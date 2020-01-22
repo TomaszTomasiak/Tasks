@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -17,8 +18,8 @@ public class DbService {
         return repository.findAll();
     }
 
-    public Task getTaskById(final Long id){
-        return repository.findOneById(id);
+    public Optional<Task> getTask(final Long id){
+        return repository.findById(id);
     }
 
     public Task saveTask(final Task task) {
@@ -26,6 +27,8 @@ public class DbService {
     }
 
     public void deleteTask(Long id) {
-        repository.delete(id);
+        repository.deleteById(id);
     }
+
+
 }
