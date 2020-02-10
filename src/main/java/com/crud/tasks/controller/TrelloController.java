@@ -22,13 +22,12 @@ public class TrelloController {
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
     public void getTrelloboards() {
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
-        /*
+
         trelloBoards.stream()
                 .filter(n -> n.getName() != null && n.getId() != null && n.getName().contains("Kodilla"))
                 .forEach(trelloBoardDto -> System.out.println(trelloBoardDto.getId() + " " + trelloBoardDto.getName()));
-     */
-        trelloBoards.forEach(trelloBoardDto ->
 
+        trelloBoards.forEach(trelloBoardDto ->
         {
             System.out.println(trelloBoardDto.getName() + " - " + trelloBoardDto.getId());
 
@@ -38,7 +37,6 @@ public class TrelloController {
                     System.out.println(trelloList.getName() + " - " + trelloList.getId() + " - " + trelloList.isClosed()));
         });
     }
-
 
     @RequestMapping(method = RequestMethod.POST, value = "createTrelloCard")
     public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {

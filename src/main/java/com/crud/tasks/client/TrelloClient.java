@@ -30,16 +30,6 @@ public class TrelloClient {
     @Value("${trello.app.username}")
     private String userName;
 
-    private URI url() {
-        return UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/" + userName + "/boards")
-                .queryParam("key", trelloAppKey)
-                .queryParam("token", trelloToken)
-                .queryParam("fields", "name,id")
-                .queryParam("lists", "all").build().encode().toUri();
-    }
-
-
-
     @Autowired
     private RestTemplate restTemplate;
 
@@ -50,7 +40,7 @@ public class TrelloClient {
         Optional<TrelloBoardDto[]> optional = Optional.of(boardsResponse);
 
 
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             return Arrays.asList(boardsResponse);
         }
         return new ArrayList<>();
@@ -65,5 +55,13 @@ public class TrelloClient {
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
         return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
+    }
+
+    private URI url() {
+        return UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/" + userName + "/boards")
+                .queryParam("key", trelloAppKey)
+                .queryParam("token", trelloToken)
+                .queryParam("fields", "name,id")
+                .queryParam("lists", "all").build().encode().toUri();
     }
 }
