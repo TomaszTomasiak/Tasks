@@ -26,19 +26,4 @@ public class CreatedTrelloCard {
     @JsonProperty("badges")
     private Badges badges;
 
-    /*
-    @JsonProperty("attachmentsByType")
-    private AttachmentByType attachmentByType;
-
-    @JsonProperty("trello")
-    private Trello trello;
-
-    @JsonProperty("board")
-    private int board;
-
-    @JsonProperty("card")
-    private int card;
-
-     */
-
 }
