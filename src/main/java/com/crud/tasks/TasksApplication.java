@@ -16,6 +16,5 @@ public class TasksApplication /*extends SpringBootServletInitializer*/ {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(TasksApplication.class);
     }
-
  */
 }
