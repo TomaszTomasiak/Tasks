@@ -30,12 +30,13 @@ public class SimpleEmailService {
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
-
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
+
         if(mail.getToCC() != null) {
             mailMessage.setBcc(mail.getToCC());
         }
+
         return mailMessage;
     }
 }
