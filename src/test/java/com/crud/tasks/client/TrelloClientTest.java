@@ -1,6 +1,6 @@
 package com.crud.tasks.client;
 
-import com.crud.tasks.domain.CreatedTrelloCard;
+import com.crud.tasks.domain.CreatedTrelloCardDto;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.trello.config.TrelloConfig;
@@ -70,12 +70,12 @@ public class TrelloClientTest {
     public void shouldCreateCard() {
         //Given
         TrelloCardDto trelloCardDto = new TrelloCardDto(name, desc, pos, id);
-        CreatedTrelloCard createdTrelloCard = new CreatedTrelloCard("1", name, "http://test.com");
+        CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto("1", name, "http://test.com");
 
-        when(restTemplate.postForObject(urlCreateCard(), null, CreatedTrelloCard.class)).thenReturn(createdTrelloCard);
+        when(restTemplate.postForObject(urlCreateCard(), null, CreatedTrelloCardDto.class)).thenReturn(createdTrelloCardDto);
 
         //When
-        CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
+        CreatedTrelloCardDto newCard = trelloClient.createNewCard(trelloCardDto);
 
         //Then
         assertEquals("1", newCard.getId());
