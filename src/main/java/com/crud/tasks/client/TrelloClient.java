@@ -37,7 +37,6 @@ public class TrelloClient {
             LOGGER.error(e.getMessage(), e);
             return new ArrayList<>();
         }
-
     }
 
     public CreatedTrelloCardDto createNewCard(TrelloCardDto trelloCardDto) {

@@ -36,5 +36,6 @@ dependencies {
     compile('io.springfox:springfox-swagger-ui:2.7.0')
     compile('org.springframework.boot:spring-boot-starter-mail:2.2.4.RELEASE')
     //providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    compile('com.google.code.gson:gson:2.8.2')
 
 }
