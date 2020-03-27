@@ -38,7 +38,7 @@ public class TaskControllerTest {
     TaskController taskController;
 
     @Test
-    public void schouldFetchEmptyListOfTasks() throws Exception{
+    public void schouldFetchEmptyListOfTasks() throws Exception {
         //Given
         List<TaskDto> tasks = new ArrayList<>();
         when(taskController.getTasks()).thenReturn(tasks);
@@ -50,7 +50,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void schouldFetchNotEmptyListOfTasks() throws Exception{
+    public void schouldFetchNotEmptyListOfTasks() throws Exception {
         //Given
         List<TaskDto> tasks = new ArrayList<>();
         tasks.add(new TaskDto(15L, "Task_title", "Task_content"));
@@ -66,7 +66,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void shouldGetTaskWithIndicatedId() throws Exception{
+    public void shouldGetTaskWithIndicatedId() throws Exception {
         //Given
         TaskDto taskDto = new TaskDto(15L, "Task_title", "Task_content");
         when(taskController.getTask(15L)).thenReturn(taskDto);
@@ -80,7 +80,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void shouldDeleteTask() throws Exception{
+    public void shouldDeleteTask() throws Exception {
         //Given
         List<TaskDto> tasks = new ArrayList<>();
         tasks.add(new TaskDto(15L, "Task_title", "Task_content"));
