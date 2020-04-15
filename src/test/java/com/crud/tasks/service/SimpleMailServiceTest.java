@@ -15,10 +15,10 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
-public class SimpleEmailServiceTest {
+public class SimpleMailServiceTest {
 
     @InjectMocks
-    private SimpleEmailService simpleEmailService;
+    private SimpleMailService simpleMailService;
 
     @Mock
     private JavaMailSender javaMailSender;
@@ -34,7 +34,7 @@ public class SimpleEmailServiceTest {
         mailMessage.setText(mail.getMessage());
 
         //When
-        simpleEmailService.send(mail);
+        simpleMailService.send(mail);
 
         //Then
         verify(javaMailSender, times(1)).send(mailMessage);
@@ -52,7 +52,7 @@ public class SimpleEmailServiceTest {
         mailMessage.setBcc(mail.getToCC());
 
         //When
-        simpleEmailService.send(mail);
+        simpleMailService.send(mail);
 
         //Then
         verify(javaMailSender, times(1)).send(mailMessage);

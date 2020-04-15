@@ -3,7 +3,7 @@ package com.crud.tasks.scheduler;
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.Mail;
 import com.crud.tasks.repository.TaskRepository;
-import com.crud.tasks.service.SimpleEmailService;
+import com.crud.tasks.service.SimpleMailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,7 +23,7 @@ public class EmailSchedulerTestSuite {
     private EmailScheduler emailScheduler;
 
     @Mock
-    private SimpleEmailService simpleEmailService;
+    private SimpleMailService simpleMailService;
 
     @Mock
     private TaskRepository taskRepository;
@@ -40,7 +40,7 @@ public class EmailSchedulerTestSuite {
         emailScheduler.sendInformationEmail();
         //then
         verify(taskRepository, times(1)).count();
-        verify(simpleEmailService, times(1)).send(new Mail("test@test.test", "",
+        verify(simpleMailService, times(1)).send(new Mail("test@test.test", "",
                 "Tasks: Once a day email","Currently in database you have got: 20 tasks"));
         verify(adminConfig, times(1)).getAdminMail();
     }

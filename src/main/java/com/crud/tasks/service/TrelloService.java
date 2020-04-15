@@ -22,7 +22,7 @@ public class TrelloService {
     private TrelloClient trelloClient;
 
     @Autowired
-    private SimpleEmailService emailService;
+    private SimpleMailService emailService;
 
     @Autowired
     private AdminConfig adminConfig;
