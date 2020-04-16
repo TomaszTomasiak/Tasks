@@ -24,10 +24,20 @@ public class SimpleMailService {
     @Autowired
     private MailCreatorService mailCreatorService;
 
-    public void send(final Mail mail, EmailSelector selector) {
+    public void sendMime(final Mail mail, EmailSelector selector) {
         LOGGER.info("Starting email preparation...");
         try {
             javaMailSender.send(createMimeMessage(mail, selector));
+            LOGGER.info("Email has been sent.");
+        } catch (MailException e) {
+            LOGGER.error("Failed to process email sending: ", e.getMessage(), e);
+        }
+    }
+
+    public void sendMail(final Mail mail) {
+        LOGGER.info("Starting email preparation...");
+        try {
+            javaMailSender.send(createMailMessage(mail));
             LOGGER.info("Email has been sent.");
         } catch (MailException e) {
             LOGGER.error("Failed to process email sending: ", e.getMessage(), e);

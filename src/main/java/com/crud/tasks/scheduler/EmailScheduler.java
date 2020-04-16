@@ -31,7 +31,7 @@ public class EmailScheduler {
         if(size == 1) {
             tasks = "task";
         }
-        simpleMailService.send(new Mail(
+        simpleMailService.sendMime(new Mail(
                 adminConfig.getAdminMail(), SUBJECT,
                     "Currently in database you have got: " + size + " " + tasks),
                 EmailSelector.DAILY_TASKS_NUMBER);
