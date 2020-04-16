@@ -74,6 +74,6 @@ public class MailCreatorService {
         context.setVariable("is_friend", true);
         context.setVariable("is_tasks", true);
         context.setVariable("application_functionality", tasks);
-        return templateEngine.process("mail/created-trello-card-mail", context);
+        return templateEngine.process("mail/daily-mail", context);
     }
 }
