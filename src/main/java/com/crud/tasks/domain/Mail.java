@@ -1,14 +1,21 @@
 package com.crud.tasks.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
 @Data
+@Builder
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class Mail {
+
+    @NonNull
     private String mailTo;
+
     private String toCC;
+
+    @NonNull
     private String subject;
+
+    @NonNull
     private String message;
 }

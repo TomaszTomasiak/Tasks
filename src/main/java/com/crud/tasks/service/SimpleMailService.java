@@ -11,6 +11,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SimpleMailService {
 
@@ -22,35 +24,39 @@ public class SimpleMailService {
     @Autowired
     private MailCreatorService mailCreatorService;
 
-    public void send(final Mail mail) {
+    public void send(final Mail mail, EmailSelector selector) {
         LOGGER.info("Starting email preparation...");
         try {
-            javaMailSender.send(createMimeMessage(mail));
+            javaMailSender.send(createMimeMessage(mail, selector));
             LOGGER.info("Email has been sent.");
         } catch (MailException e) {
             LOGGER.error("Failed to process email sending: ", e.getMessage(), e);
         }
     }
 
-    private MimeMessagePreparator createMimeMessage(final Mail mail) {
+    private MimeMessagePreparator createMimeMessage(final Mail mail, EmailSelector selector) {
         return mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+            messageHelper.setText(getMailSelector(mail.getMessage(), selector), true);
         };
+    }
+    private String getMailSelector (String message, EmailSelector selector) {
+        if (selector == EmailSelector.DAILY_TASKS_NUMBER) {
+            return mailCreatorService.buildDailyEmail(message);
+        } else if (selector == EmailSelector.CREATED_TRELLO_CARD) {
+            return mailCreatorService.buildTrelloCardEmail(message);
+        }
+        return "";
     }
 
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
+        Optional.ofNullable(mail.getToCC()).ifPresent(mailMessage::setCc);
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
-
-        if(mail.getToCC() != null) {
-            mailMessage.setBcc(mail.getToCC());
-        }
-
         return mailMessage;
     }
 }

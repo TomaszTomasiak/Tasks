@@ -3,10 +3,13 @@ package com.crud.tasks.scheduler;
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.Mail;
 import com.crud.tasks.repository.TaskRepository;
+import com.crud.tasks.service.EmailSelector;
 import com.crud.tasks.service.SimpleMailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EmailScheduler {
 
     private static final String SUBJECT = "Tasks: Once a day email";
@@ -21,16 +24,16 @@ public class EmailScheduler {
     private AdminConfig adminConfig;
 
     @Scheduled(cron = "0 0 10 * * *")
-    void sendInformationEmail() {
+    public void sendInformationEmail() {
 
         long size = taskRepository.count();
         String tasks = "tasks";
         if(size == 1) {
             tasks = "task";
         }
-        simpleMailService.send(new Mail(adminConfig.getAdminMail(), "", SUBJECT,
-                    "Currently in database you have got: " + size + " " + tasks));
-
+        simpleMailService.send(new Mail(
+                adminConfig.getAdminMail(), SUBJECT,
+                    "Currently in database you have got: " + size + " " + tasks),
+                EmailSelector.DAILY_TASKS_NUMBER);
     }
-
 }
