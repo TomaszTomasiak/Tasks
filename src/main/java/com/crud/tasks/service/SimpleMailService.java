@@ -24,7 +24,7 @@ public class SimpleMailService {
     @Autowired
     private MailCreatorService mailCreatorService;
 
-    public void sendMime(final Mail mail, EmailSelector selector) {
+    public void send(final Mail mail, EmailSelector selector) {
         LOGGER.info("Starting email preparation...");
         try {
             javaMailSender.send(createMimeMessage(mail, selector));

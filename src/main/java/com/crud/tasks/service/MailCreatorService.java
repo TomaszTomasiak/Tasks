@@ -64,7 +64,7 @@ public class MailCreatorService {
 
     public String buildDailyEmail(String message) {
 
-     List<Task> tasks = taskRepository.findAll();
+        List<Task> tasks = taskRepository.findAll();
 
         Context context = createContext();
         context.setVariable("message", message);

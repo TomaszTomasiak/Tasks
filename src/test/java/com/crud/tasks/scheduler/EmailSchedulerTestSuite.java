@@ -43,7 +43,7 @@ public class EmailSchedulerTestSuite {
         emailScheduler.sendInformationEmail();
         //then
         verify(taskRepository, times(1)).count();
-        verify(simpleMailService, times(1)).sendMime(new Mail("test@test.test", null,
+        verify(simpleMailService, times(1)).send(new Mail("test@test.test", null,
                 "Tasks: Once a day email","Currently in database you have got: 20 tasks"), EmailSelector.DAILY_TASKS_NUMBER);
         verify(adminConfig, times(1)).getAdminMail();
     }
